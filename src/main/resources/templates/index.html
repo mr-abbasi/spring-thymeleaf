@@ -7,7 +7,8 @@
 <body>
 <div th:replace="header :: .header"></div>
 <h1 th:text="'Hello '+ ${userName} + ', Welcome to the project!!'"></h1>
-<a th:href="@{/aboutus.html}" >About Us</a>
+<a th:href="@{/aboutus}" >About Us</a>
+<a th:href="@{/contactus}">Contact Us</a>
 <div th:replace="footer :: .footer"></div>
 <script src="script.js"></script>
 </body>
