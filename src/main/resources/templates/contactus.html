@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-Contact Us Place Holder
+<form th:action="@{/saveContactUs}"
+      method="post">
+    <div>
+        <label for="fullName">Full Name</label>
+        <input id="fullName"
+               type="text"
+               name="fullName"
+               placeholder="Full Name">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input id="email"
+               type="text"
+               name="email"
+               placeholder="Email">
+    </div>
+    <div>
+        <label for="subject">Subject</label>
+        <input type="text"
+               id="subject"
+               name="subject"
+               placeholder="Subject">
+    </div>
+    <div>
+        <label for="message">Message</label>
+        <textarea name="message"
+                  id="message"
+                  placeholder="Type your message here"></textarea>
+    </div>
+    <button type="submit">Submit</button>
+</form>
 </body>
 </html>
