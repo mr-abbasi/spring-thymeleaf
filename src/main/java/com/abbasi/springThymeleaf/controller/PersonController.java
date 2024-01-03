@@ -1,9 +1,13 @@
 package com.abbasi.springThymeleaf.controller;
 
+import com.abbasi.springThymeleaf.model.Sexuality;
 import com.abbasi.springThymeleaf.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.stream.Collectors;
 
 @Controller
 public class PersonController {
@@ -14,8 +18,12 @@ public class PersonController {
     }
 
     @GetMapping("/persons")
-    public String getPersons(Model model){
-        model.addAttribute("persons",personService.getPersons());
+    public String getPersons(@RequestParam(required = false) Sexuality sexuality, Model model) {
+        var persons = personService.getPersons();
+        if (sexuality != null) {
+            persons = persons.stream().filter(p -> p.getSexuality() == sexuality).collect(Collectors.toList());
+        }
+        model.addAttribute("persons", persons);
 
         return "persons";
     }

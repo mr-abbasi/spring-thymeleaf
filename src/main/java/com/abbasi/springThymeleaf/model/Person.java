@@ -4,11 +4,14 @@ public class Person {
     private String firstName;
     private String lastName;
     private byte age;
+    private Sexuality sexuality;
 
-    public Person(String firstName, String lastName, byte age) {
+    public Person(String firstName, String lastName, byte age, Sexuality sexuality) {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setAge(age);
+        this.setSexuality(sexuality);
+
     }
 
     public String getFirstName() {
@@ -34,4 +37,13 @@ public class Person {
     public void setAge(byte age) {
         this.age = age;
     }
+
+    public Sexuality getSexuality() {
+        return sexuality;
+    }
+
+    public void setSexuality(Sexuality sexuality) {
+        this.sexuality = sexuality;
+    }
 }
+
