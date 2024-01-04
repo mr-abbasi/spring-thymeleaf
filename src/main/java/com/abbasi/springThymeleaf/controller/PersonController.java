@@ -5,7 +5,7 @@ import com.abbasi.springThymeleaf.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.stream.Collectors;
 
@@ -17,8 +17,8 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("/persons")
-    public String getPersons(@RequestParam(required = false) Sexuality sexuality, Model model) {
+    @GetMapping({"persons","/persons/{sexuality}"})
+    public String getPersons(@PathVariable(required = false) Sexuality sexuality, Model model) {
         var persons = personService.getPersons();
         if (sexuality != null) {
             persons = persons.stream().filter(p -> p.getSexuality() == sexuality).collect(Collectors.toList());
