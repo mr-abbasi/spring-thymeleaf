@@ -6,33 +6,33 @@
     <title>Title</title>
 </head>
 <body>
+<ul>
+    <li th:each="error : ${#fields.errors('contact.*')}" th:text="${error}"></li>
+</ul>
 <form th:action="@{/saveContactUs}"
+      th:object="${contact}"
       method="post">
     <div>
         <label for="fullName">Full Name</label>
-        <input id="fullName"
-               type="text"
-               name="fullName"
+        <input type="text"
+               th:field="*{fullName}"
                placeholder="Full Name">
     </div>
     <div>
         <label for="email">Email</label>
-        <input id="email"
-               type="text"
-               name="email"
+        <input  type="text"
+                th:field="*{email}"
                placeholder="Email">
     </div>
     <div>
         <label for="subject">Subject</label>
         <input type="text"
-               id="subject"
-               name="subject"
+               th:field="*{subject}"
                placeholder="Subject">
     </div>
     <div>
         <label for="message">Message</label>
-        <textarea name="message"
-                  id="message"
+        <textarea th:field="*{message}"
                   placeholder="Type your message here"></textarea>
     </div>
     <button type="submit">Submit</button>
