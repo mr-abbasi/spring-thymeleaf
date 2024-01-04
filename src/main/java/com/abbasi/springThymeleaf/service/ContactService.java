@@ -2,6 +2,7 @@ package com.abbasi.springThymeleaf.service;
 
 import com.abbasi.springThymeleaf.model.Contact;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.ApplicationScope;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -9,7 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-@SessionScope
+//@RequestScope
+//@SessionScope
+@ApplicationScope
 public class ContactService {
     private int callService = 0;
 
