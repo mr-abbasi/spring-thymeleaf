@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -15,13 +16,13 @@ public class SecurityConfig {
     @Bean()
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(h->h.disable())
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(r ->
                 r.requestMatchers("/").permitAll()
                         .requestMatchers("/aboutus").permitAll()
                         .requestMatchers("/contactus").permitAll()
-                        .requestMatchers("/saveContactUs").denyAll()
-                        .requestMatchers("/persons/**").denyAll()
+                        .requestMatchers("/saveContactUs").authenticated()
+                        .requestMatchers("/persons/**").authenticated()
                         .anyRequest().denyAll())
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults());
