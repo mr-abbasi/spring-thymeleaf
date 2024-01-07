@@ -1,1 +1,15 @@
-<div class="header">Header Place Holder</div>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+
+</head>
+<body>
+<div class="header">
+    <span sec:authorize="isAuthenticated()"></span>
+    <a href="/login" sec:authorize="isAnonymous()">Login</a>
+    &nbsp;
+    &nbsp;
+    <a href="/logout" sec:authorize="isAuthenticated()">Logout</a>
+</div>
+</body>
+</html>

@@ -6,6 +6,7 @@
     <title>Title</title>
 </head>
 <body>
+<div th:replace="header :: .header"></div>
 <ul>
     <li th:each="error : ${#fields.errors('contact.*')}" th:text="${error}"></li>
 </ul>
@@ -37,5 +38,6 @@
     </div>
     <button type="submit">Submit</button>
 </form>
+<div th:replace="footer :: .footer"></div>
 </body>
 </html>
