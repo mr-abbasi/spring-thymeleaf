@@ -2,10 +2,14 @@ package com.abbasi.springThymeleaf.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -13,19 +17,38 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean()
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(r ->
-                r.requestMatchers("/").permitAll()
-                        .requestMatchers("/aboutus").permitAll()
-                        .requestMatchers("/contactus").permitAll()
-                        .requestMatchers("/saveContactUs").authenticated()
-                        .requestMatchers("/persons/**").authenticated()
-                        .anyRequest().denyAll())
+                        r.requestMatchers("/").permitAll()
+                                .requestMatchers("/aboutus").permitAll()
+                                .requestMatchers("/contactus").permitAll()
+                                .requestMatchers("/saveContactUs").authenticated()
+                                .requestMatchers("/persons/**").authenticated()
+                                .anyRequest().denyAll())
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults());
         return http.build();
+    }
+
+    @Bean
+    public InMemoryUserDetailsManager userManager() {
+        UserDetails user = User
+                .withDefaultPasswordEncoder()
+                .username("mohammad")
+                .password("1234567")
+                .roles("USER")
+                .build();
+
+        UserDetails admin = User
+                .withDefaultPasswordEncoder()
+                .username("john")
+                .password("123456")
+                .roles("USER", "ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }
