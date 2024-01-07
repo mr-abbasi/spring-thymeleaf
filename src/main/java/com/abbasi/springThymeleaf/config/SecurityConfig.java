@@ -14,10 +14,13 @@ public class SecurityConfig {
 
     @Bean()
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(r ->
+        http
+                .csrf(h->h.disable())
+                .authorizeHttpRequests(r ->
                 r.requestMatchers("/").permitAll()
                         .requestMatchers("/aboutus").permitAll()
                         .requestMatchers("/contactus").permitAll()
+                        .requestMatchers("/saveContactUs").denyAll()
                         .requestMatchers("/persons/**").denyAll()
                         .anyRequest().denyAll())
                 .httpBasic(Customizer.withDefaults())

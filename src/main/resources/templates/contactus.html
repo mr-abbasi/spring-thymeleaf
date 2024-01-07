@@ -9,7 +9,7 @@
 <ul>
     <li th:each="error : ${#fields.errors('contact.*')}" th:text="${error}"></li>
 </ul>
-<form th:action="@{/saveContactUs}"
+<form action="/saveContactUs"
       th:object="${contact}"
       method="post">
     <div>
