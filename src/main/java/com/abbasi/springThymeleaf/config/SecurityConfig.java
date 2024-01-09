@@ -25,6 +25,7 @@ public class SecurityConfig {
                                 .requestMatchers("/contactus").permitAll()
                                 .requestMatchers("/saveContactUs").authenticated()
                                 .requestMatchers("/persons/**").authenticated()
+                                .requestMatchers("/error").permitAll()
                                 .anyRequest().denyAll())
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(loginConfigurer -> loginConfigurer.loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error=true").permitAll())

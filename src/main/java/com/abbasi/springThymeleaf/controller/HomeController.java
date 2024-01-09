@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping(value = {"/","","/home"})
-    public String index(Model model){
+    public String index(Model model) throws Exception {
         model.addAttribute("userName","John Doe");
+//        throw new Exception("this is an error");
         return "index";
     }
 }
